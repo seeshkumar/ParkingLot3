@@ -1,0 +1,32 @@
+﻿[
+  {
+    "name": "TWO1",
+    "category": "TWOWHEELER",
+    "isOcupied": false
+  },
+  {
+    "name": "TWO2",
+    "category": "TWOWHEELER",
+    "isOcupied": false
+  },
+  {
+    "name": "FOUR1",
+    "category": "FOURWHEELER",
+    "isOcupied": false
+  },
+  {
+    "name": "FOUR2",
+    "category": "FOURWHEELER",
+    "isOcupied": false
+  },
+  {
+    "name": "HEAVY1",
+    "category": "HEAVY",
+    "isOcupied": false
+  },
+  {
+    "name": "HEAVY2",
+    "category": "HEAVY",
+    "isOcupied": false
+  }
+]
