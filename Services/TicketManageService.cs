@@ -11,21 +11,25 @@ namespace ParkingLot.Services
 {
     class TicketManageService : ITicketManageService
     {
-
-        public Ticket GenerateTicket(Injector injector, Slot freeSlot, Vechile vechile)
+        TicketsFileService ticketsFileService;
+        public TicketManageService(TicketsFileService ticketsFileService) 
         {
-            List<Ticket> tickets = injector.ReadTickets();
+            this.ticketsFileService = ticketsFileService;
+        }
+        public Ticket GenerateTicket(Slot freeSlot, Vechile vechile)
+        {
+            List<Ticket> tickets = ticketsFileService.ReadTickets();
             DateTime inTime = DateTime.Now;
             Ticket ticket = new Ticket(freeSlot.name, vechile.number, inTime);
             tickets.Add(ticket);
-            injector.SaveTickets(tickets);
+            ticketsFileService.SaveTickets(tickets);
             return ticket;
         }
 
-        public void DeleteTicket(Injector injector, List<Ticket> tickets, Ticket ticket)
+        public void DeleteTicket(List<Ticket> tickets, Ticket ticket)
         {
             tickets.Remove(ticket);
-            injector.SaveTickets(tickets);
+            ticketsFileService.SaveTickets(tickets);
         }
 
     }

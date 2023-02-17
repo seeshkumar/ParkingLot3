@@ -11,11 +11,12 @@ class Program
         int mode;
         
         ParkingSlotsFileService parkingSlotsFileService = new ParkingSlotsFileService();
-        IInitializeLotService initializeLotService = new InitializeLotService();
-        IDriveVechileService driveVechileService = new DriveVechileService();
-
         TicketsFileService ticketsFileService = new TicketsFileService();
-        ITicketManageService ticketManageService = new TicketManageService();
+        TicketManageService ticketManageService = new TicketManageService(ticketsFileService);
+
+        IInitializeLotService initializeLotService = new InitializeLotService(parkingSlotsFileService, ticketsFileService);
+        IDriveVechileService driveVechileService = new DriveVechileService(parkingSlotsFileService, ticketManageService, ticketsFileService);
+
 
         Injector injector = new Injector(parkingSlotsFileService, initializeLotService, driveVechileService, ticketsFileService, ticketManageService);
         

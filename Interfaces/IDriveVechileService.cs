@@ -10,8 +10,8 @@ namespace ParkingLot.Interfaces
 {
     interface IDriveVechileService
     {
-        public string ParkVechile(Injector injector, List<Slot> slots, Vechile vechile);
-        public string UnParkVechile(Injector injector, List<Slot> slots, string number);
+        public string ParkVechile(List<Slot> slots, Vechile vechile);
+        public string UnParkVechile(List<Slot> slots, string number);
 
     }
 }

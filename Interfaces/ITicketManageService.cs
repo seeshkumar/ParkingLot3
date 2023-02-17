@@ -10,8 +10,8 @@ namespace ParkingLot.Interfaces
 {
     interface ITicketManageService
     {
-        public Ticket GenerateTicket(Injector injector, Slot freeSlot, Vechile vechile);
-        public void DeleteTicket(Injector injector, List<Ticket> tickets, Ticket ticket);
+        public Ticket GenerateTicket(Slot freeSlot, Vechile vechile);
+        public void DeleteTicket(List<Ticket> tickets, Ticket ticket);
 
 
     }

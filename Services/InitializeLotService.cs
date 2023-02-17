@@ -11,9 +11,17 @@ namespace ParkingLot.Services
 {
     class InitializeLotService : IInitializeLotService
     {
-
-        public List<Slot> InitializeLot(Injector injector, int twoWHEELERSlots, int fourWHEELERSlots, int heavyVechileSlots)
+        ParkingSlotsFileService parkingSlotsFileService;
+        TicketsFileService ticketsFileService;
+        public InitializeLotService(ParkingSlotsFileService parkingSlotsFileService,TicketsFileService ticketsFileService)
         {
+            this.parkingSlotsFileService = parkingSlotsFileService;
+            this.ticketsFileService = ticketsFileService;
+        }
+
+        public List<Slot> InitializeLot(int twoWHEELERSlots, int fourWHEELERSlots, int heavyVechileSlots)
+        {
+
 
             List<Slot> slots = new List<Slot>();
             string name;
@@ -35,8 +43,8 @@ namespace ParkingLot.Services
                 name = $"HEAVY{index + 1}";
                 slots.Add(new Slot(name, false, "HEAVY"));
             }
-            injector.SaveSlots(slots);
-            injector.SaveTickets(new List<Ticket>());//clearing tickets db
+            parkingSlotsFileService.SaveSlots(slots);
+            ticketsFileService.SaveTickets(new List<Ticket>());//clearing tickets db
             return slots;
         }
 

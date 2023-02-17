@@ -11,7 +11,16 @@ namespace ParkingLot.Services
 {
     class DriveVechileService : IDriveVechileService
     {
-        public string ParkVechile(Injector injector, List<Slot> slots, Vechile vechile)
+        ParkingSlotsFileService parkingSlotsFileService;
+        TicketManageService ticketManageService;
+        TicketsFileService ticketsFileService;
+        public DriveVechileService(ParkingSlotsFileService parkingSlotsFileService, TicketManageService ticketManageService, TicketsFileService ticketsFileService) 
+        {
+            this.parkingSlotsFileService = parkingSlotsFileService;
+            this.ticketManageService = ticketManageService;
+            this.ticketsFileService = ticketsFileService;
+        }
+        public string ParkVechile(List<Slot> slots, Vechile vechile)
         {
                         Slot freeSlot = slots.FirstOrDefault(s => s.category == vechile.category && s.isOccupied == false);
                         if (freeSlot == null)
@@ -20,18 +29,18 @@ namespace ParkingLot.Services
                         }
 
                         freeSlot.isOccupied = true;
-                        injector.SaveSlots(slots);
-                        Ticket ticket = injector.GenerateTicket(freeSlot, vechile);
+                        parkingSlotsFileService.SaveSlots(slots);
+                        Ticket ticket = ticketManageService.GenerateTicket(freeSlot, vechile);
                         //ticket string
                         return $"VECHILE NUMBER : {ticket.vechileNumber} \nSLOT NAME : {ticket.slotName} \nIN TIME : {ticket.inTime} \nOUT TIME : -";
                     
             //return "parkvechilefunc";
             }
 
-        public string UnParkVechile(Injector injector, List<Slot> slots, string number)
+        public string UnParkVechile(List<Slot> slots, string number)
         {
 
-            List<Ticket> tickets = injector.ReadTickets();
+            List<Ticket> tickets = ticketsFileService.ReadTickets();
 
             Ticket ticket = tickets.FirstOrDefault(t => t.vechileNumber == number);
             if (ticket == null)
@@ -39,12 +48,12 @@ namespace ParkingLot.Services
                 return "Vechile not found";
             }
             slots.FirstOrDefault(s => s.name == ticket.slotName).isOccupied = false;
-            injector.SaveSlots(slots);
+            parkingSlotsFileService.SaveSlots(slots);
 
             DateTime outTime = DateTime.Now;
             string msg = $"VECHILE NUMBER : {ticket.vechileNumber} \nSLOT NAME : {ticket.slotName} \nIN TIME : {ticket.inTime} \nOUT TIME : {outTime}";
 
-            injector.DeleteTicket(tickets, ticket);
+            ticketManageService.DeleteTicket(tickets, ticket);
 
             return msg;
         }

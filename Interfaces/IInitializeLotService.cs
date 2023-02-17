@@ -10,7 +10,7 @@ namespace ParkingLot.Interfaces
 {
     interface IInitializeLotService
     {
-        public List<Slot> InitializeLot(Injector injector, int twoWheelerSlots, int fourWheelerSlots, int heavyVechileSlots);
+        public List<Slot> InitializeLot(int twoWheelerSlots, int fourWheelerSlots, int heavyVechileSlots);
 
     }
 }

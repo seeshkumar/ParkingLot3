@@ -53,17 +53,17 @@ namespace ParkingLot.Injectors
 
         public List<Slot> InitializeLot(int twoWheelerSlots, int fourWheelerSlots, int heavyVechileSlots)
         {
-            return initializeLotService.InitializeLot(this, twoWheelerSlots, fourWheelerSlots, heavyVechileSlots);
+            return initializeLotService.InitializeLot(twoWheelerSlots, fourWheelerSlots, heavyVechileSlots);
         }
 
         public string ParkVechile(List<Slot> slots, Vechile vechile)
         {
-            return driveVechileService.ParkVechile(this, slots, vechile);
+            return driveVechileService.ParkVechile(slots, vechile);
         }
 
         public string UnParkVechile(List<Slot> slots, string number)
         {
-            return driveVechileService.UnParkVechile(this, slots, number);
+            return driveVechileService.UnParkVechile(slots, number);
         }
 
 
@@ -79,11 +79,11 @@ namespace ParkingLot.Injectors
         }
         public Ticket GenerateTicket(Slot freeSlot, Vechile vechile)
         {
-            return ticketManageService.GenerateTicket(this, freeSlot, vechile);
+            return ticketManageService.GenerateTicket(freeSlot, vechile);
         }
         public void DeleteTicket(List<Ticket> tickets, Ticket ticket)
         {
-            ticketManageService.DeleteTicket(this, tickets, ticket);
+            ticketManageService.DeleteTicket(tickets, ticket);
         }
 
     }
