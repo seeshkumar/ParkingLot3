@@ -28,6 +28,7 @@ class Program
         bool endProgram = false;
         while (!endProgram)
         {
+            
             Console.WriteLine("\n\n1.Initialize a parking lot.\n2.See Parking Lot current occupancy details.\n3.Park Vehicle and Issue Ticket.\n4.Un-park Vehicle.\n5.End   :");
             mode = Convert.ToInt32(Console.ReadLine());
 
@@ -68,7 +69,7 @@ class Program
                     Console.Write("Vechile number : ");
                     number = Console.ReadLine();
                     Console.WriteLine("Category(TWOWHEELER/ FOURWHEELER/ HEAVY) :");
-                    category = Console.ReadLine();
+                    category = Console.ReadLine().ToUpper();
                     msg = "Could not park vechile.";
                     if(category == "TWOWHEELER")
                     {

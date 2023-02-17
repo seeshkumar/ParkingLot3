@@ -28,7 +28,8 @@ namespace ParkingLot.Services
 
         public void DeleteTicket(List<Ticket> tickets, Ticket ticket)
         {
-            tickets.Remove(ticket);
+            if(tickets.Contains(ticket))
+                tickets.Remove(ticket);
             ticketsFileService.SaveTickets(tickets);
         }
 
